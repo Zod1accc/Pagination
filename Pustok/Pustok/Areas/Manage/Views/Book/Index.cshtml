@@ -1,0 +1,67 @@
+﻿@model PaginatedList<Book>
+@{
+    int count = (Model.Page-1)*3;
+}
+<div style="position:relative">
+    <div class="d-flex justify-content-between align-items-center container-fluid">
+        <h1>Books</h1>
+        <a class="btn btn-success" asp-action="create" asp-controller="book">Create Book</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Code</th>
+                <th scope="col">CostPrice</th>
+                <th scope="col">SellPrice</th>
+                <th scope="col">DiscountPrice</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@book.Name</td>
+                    <td>@book.Code</td>
+                    <td>@book.CostPrice</td>
+                    <td>@book.SellPrice</td>
+                    <td>@book.DiscountPrice</td>
+                    <td>
+                        <a class="btn btn-info" asp-action="update" asp-controller="book" asp-route-id="@book.Id">Update</a>
+                        <a class="btn btn-danger item-delete" asp-action="delete" asp-controller="book" asp-route-id="@book.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center fixed" style="position:absolute">
+        <nav aria-label="..." >
+            <ul class="pagination">
+                @if (Model.HasPrevious)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="index" asp-controller="book" asp-route-page="@(Model.Page-1)">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= Model.TotalPage; i++)
+                {
+                    <li class="page-item @(Model.Page == i ? "active" : "")"><a class="page-link" asp-action="index" asp-controller="book" asp-route-page="@i">@i</a></li>
+
+                }
+                @if (Model.HasNext)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="index" asp-controller="book" asp-route-page="@(Model.Page+1)">Next</a>
+                    </li>
+                }
+
+            </ul>
+        </nav>
+    </div>
+</div>
