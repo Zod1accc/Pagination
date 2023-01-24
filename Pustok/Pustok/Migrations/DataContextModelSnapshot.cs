@@ -560,6 +560,9 @@ namespace Pustok.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 

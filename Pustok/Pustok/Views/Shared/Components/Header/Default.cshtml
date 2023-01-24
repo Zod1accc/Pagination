@@ -325,6 +325,11 @@
                                     {
                                         <span class="text-success font-size-bold" >@user.Fullname</span>
                                         <br>
+                                        if(user.IsAdmin == true){
+
+                                            <a asp-action="index" asp-controller="dashboard" asp-area="manage" class="font-weight-bold text-info">Admin Panel</a>
+                                            <span> / </span>
+                                        }
                                         <a asp-action="logout" asp-controller="account" class="font-weight-bold">Logout</a> 
 
                                     }

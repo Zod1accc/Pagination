@@ -6,7 +6,7 @@ using Pustok.Models;
 namespace Pustok.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    //[Authorize]
+    [Authorize(Roles ="SuperAdmin")]
     public class DashboardController : Controller
     {
         private UserManager<AppUser> _userManage;
